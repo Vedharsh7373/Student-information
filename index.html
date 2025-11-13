@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teacher Entry Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-red: red;
+      --main-white: white;
+      --main-pale: mistyrose;
+      --main-darkred: darkred;
+    }
+    body {
+      font-family: "Roboto", Arial, sans-serif;
+      margin: 0;
+      background: var(--main-pale);
+      color: var(--main-red);
+      min-height: 100vh;
+    }
+    header {
+      background: var(--main-red);
+      color: var(--main-white);
+      padding: 24px 0 18px 0;
+      text-align: center;
+      box-shadow: 0 6px 30px -10px var(--main-darkred), 0 2px 12px var(--main-red);
+    }
+    h1 {
+      margin: 0;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 2.6rem;
+      letter-spacing: 1.5px;
+      font-weight: 900;
+      text-shadow: 0 2px 4px var(--main-darkred);
+    }
+    .container {
+      max-width: 610px;
+      margin: 36px auto 0;
+      background: var(--main-white);
+      border: 2px solid var(--main-red);
+      border-radius: 19px;
+      box-shadow: 0 6px 24px -10px var(--main-darkred), 0 2px 12px var(--main-red);
+      padding: 38px 34px 36px;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      margin-top: 18px;
+      margin-bottom: 7px;
+      color: var(--main-red);
+      font-family: "Montserrat", Arial, sans-serif;
+      letter-spacing: 1px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 9.5px 9px;
+      margin-top: 2.5px;
+      border-radius: 9px;
+      border: 2px solid var(--main-red);
+      font-size: 1.06rem;
+      background: var(--main-white);
+      font-family: "Roboto", Arial, sans-serif;
+      box-sizing: border-box;
+      color: var(--main-darkred);
+      transition: box-shadow 0.16s, border-color 0.2s;
+      box-shadow: 0 1px 4px 0 var(--main-pale);
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--main-darkred);
+      outline: none;
+      background: var(--main-pale);
+      box-shadow: 0 2px 8px 0 var(--main-red);
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1.15rem;
+      font-family: "Montserrat", Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      transition: background 0.22s, color 0.22s, box-shadow 0.23s;
+      box-shadow: 0 2px 10px var(--main-pale), 0 1px 4px var(--main-red);
+    }
+    button.primary {
+      background: linear-gradient(90deg,var(--main-red),var(--main-darkred));
+      color: var(--main-white);
+      border: 2px solid var(--main-red);
+      box-shadow: 0 4px 18px -6px var(--main-darkred), 0 2px 8px var(--main-red);
+    }
+    button.primary:hover {
+      background: linear-gradient(90deg,var(--main-darkred),var(--main-red));
+      color: var(--main-white);
+      box-shadow: 0 6px 24px -8px var(--main-darkred), 0 2px 12px var(--main-red);
+    }
+    button.secondary {
+      background: var(--main-white);
+      color: var(--main-red);
+      border: 2px solid var(--main-red);
+      box-shadow: 0 2px 10px var(--main-pale), 0 1px 4px var(--main-red);
+    }
+    button.secondary:hover {
+      background: var(--main-pale);
+      color: var(--main-darkred);
+    }
+    .entry, #tableContainer {
+      margin-top: 22px;
+      padding: 16px;
+      border: 2px solid var(--main-red);
+      border-radius: 13px;
+      background: var(--main-pale);
+      font-size: 1.05rem;
+      color: var(--main-darkred);
+      font-family: "Roboto", Arial, sans-serif;
+      box-shadow: 0 2px 10px var(--main-pale);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: var(--main-white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px var(--main-pale), 0 1px 6px var(--main-red);
+    }
+    th, td {
+      border: 1px solid var(--main-red);
+      padding: 10px 9px;
+      text-align: left;
+      font-size: 1rem;
+      background: var(--main-white);
+      color: var(--main-darkred);
+      font-family: "Roboto", Arial, sans-serif;
+    }
+    th {
+      background: linear-gradient(90deg,var(--main-red),var(--main-darkred));
+      color: var(--main-white);
+      font-family: "Montserrat", Arial, sans-serif;
+      font-weight: 900;
+      letter-spacing: 1.6px;
+    }
+    #copyButton {
+      margin-top: 12px;
+      float: right;
+      background: var(--main-white);
+      color: var(--main-red);
+      border: 2px solid var(--main-red);
+      font-family: "Montserrat", Arial, sans-serif;
+      letter-spacing: 1px;
+    }
+    #copyButton:hover {
+      background: var(--main-pale);
+      color: var(--main-darkred);
+    }
+    #toggleView {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 18px;
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+    .desktop form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 28px;
+    }
+    .desktop form > div.full-width,
+    .desktop .full-width {
+      grid-column: span 2;
+    }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,0,0,0.13); z-index: 1000;}
+    .modal-content { background: var(--main-white); margin: 10% auto; padding: 28px 24px 20px 24px; width: 96%; max-width: 340px; border: 2px solid var(--main-red); border-radius: 16px; color: var(--main-red); font-size: 1rem; position: relative;}
+    .close { position: absolute; top: 8px; right: 14px; font-size: 26px; cursor: pointer; color: var(--main-darkred); font-weight: bold;}
+    .close:hover { color: var(--main-red);}
+    @media (max-width: 700px) { .container {padding: 22px 8px 20px;} th, td {font-size: 0.97rem;} .modal-content {padding: 20px 7vw;} }
+    .logo-bar {  display: flex;  justify-content: center;  align-items: center;  margin-bottom: 8px;  gap: 16px;}.logo {  height: 150px;  width: 350px;  border-radius: 7px;  background: white;  box-shadow: 0 2px 6px #ddd;}@media (max-width: 500px){  .logo { height: 150px;          width: 150px;      }  .logo-bar { gap: 15px; }}
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo-bar">
+    <img src="https://raw.githubusercontent.com/Vedharsh7373/Student-information/main/Logo_1.PNG" alt="Logo 1" class="logo">
+    <img src="https://raw.githubusercontent.com/Vedharsh7373/Student-information/main/Logo_2.png" alt="Logo 2" class="logo">
+  </div>
+  <h1>Teacher Entry Portal</h1>
+</header>
+<div class="container" id="mainContainer">
+  <button id="toggleView" class="secondary">Optimize for Desktop</button>
+  <form id="entryForm">
+    <div>
+      <label>Teacher:</label>
+      <select id="teacher" required>
+        <option value="" disabled selected>Loading...</option>
+      </select>
+    </div>
+    <div>
+      <label>Student:</label>
+      <select id="student" required>
+        <option value="" disabled selected>Select Student</option>
+      </select>
+    </div>
+    <div>
+      <label>Subject:</label>
+      <select id="subject" required>
+        <option value="" disabled selected>Select Subject</option>
+      </select>
+    </div>
+    <div>
+      <label>Chapter:</label>
+      <input type="text" id="chapter" required>
+    </div>
+    <div class="full-width">
+      <label>Work Done:</label>
+      <textarea id="workDone" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="primary">Submit Entry</button>
+  </form>
+  <div style="margin-top:15px">
+    <button id="addStudentBtn" class="secondary">Add Student</button>
+    <button id="addTeacherBtn" class="secondary">Add Teacher</button>
+  </div>
+  <div style="margin-top:15px">
+    <label>Enter PIN to view today's submissions:</label>
+    <input type="password" id="pin" placeholder="Enter PIN">
+    <button id="viewSubmissionsBtn" class="primary">View Submissions</button>
+  </div>
+  <div id="output" class="entry" style="display:none"></div>
+  <div id="tableContainer"></div>
+</div>
+
+<div class="modal" id="studentModal">
+  <div class="modal-content">
+    <span class="close" id="closeStudentModal">&times;</span>
+    <h3 style="margin-top:0;">Add New Student</h3>
+    <label>Name:</label>
+    <input type="text" id="newStudentName">
+    <label>Assign Teacher:</label>
+    <select id="newStudentTeacher"></select>
+    <button id="saveStudentBtn" class="primary">Save Student</button>
+  </div>
+</div>
+
+<div class="modal" id="teacherModal">
+  <div class="modal-content">
+    <span class="close" id="closeTeacherModal">&times;</span>
+    <h3 style="margin-top:0;">Add New Teacher</h3>
+    <label>Display Name:</label>
+    <input type="text" id="newTeacherName">
+    <label>Subjects (comma separated):</label>
+    <input type="text" id="newTeacherSubjects">
+    <label>PIN (numbers only):</label>
+    <input type="password" id="newTeacherPin">
+    <button id="saveTeacherBtn" class="primary">Save Teacher</button>
+  </div>
+</div>
+
+<script>
+// --- CHANGE MADE HERE ---
+// SCRIPT_URL now points to the Vercel proxy endpoint
+const SCRIPT_URL = "/api/entry"; 
+
+let teachers = {};
+
+function loadTeachers() {
+  // All fetch calls now go to the /api/entry endpoint
+  fetch(SCRIPT_URL + "?action=getTeachersWithDetails")
+    .then(r=>r.json())
+    .then(res=>{
+      if(res.success) {
+        teachers = res.teachers;
+        populateDropdowns();
+      } else {
+        alert("Could not fetch teachers list.");
+      }
+    });
+}
+
+function populateDropdowns() {
+  const teacherSelect = document.getElementById("teacher");
+  teacherSelect.innerHTML = '<option value="" disabled selected>Select Teacher</option>';
+  const keys = Object.keys(teachers);
+  if(keys.length === 0){
+    let o = document.createElement("option");
+    o.disabled = true;
+    o.selected = true;
+    o.textContent = "No teachers available";
+    teacherSelect.appendChild(o);
+    return;
+  }
+  keys.forEach(k => {
+    let o = document.createElement("option");
+    o.value = k;
+    o.textContent = teachers[k].display;
+    teacherSelect.appendChild(o);
+  });
+}
+
+document.getElementById("teacher").addEventListener("change", function () {
+  let t = this.value;
+  const studentSelect = document.getElementById("student");
+  studentSelect.innerHTML = '<option value="" disabled selected>Select Student</option>';
+  teachers[t].students.forEach(s => {
+    let o = document.createElement("option");
+    o.value = s;
+    o.textContent = s;
+    studentSelect.appendChild(o);
+  });
+  const subjectSelect = document.getElementById("subject");
+  subjectSelect.innerHTML = '<option value="" disabled selected>Select Subject</option>';
+  teachers[t].subjects.forEach(s => {
+    let o = document.createElement("option");
+    o.value = s;
+    o.textContent = s;
+    subjectSelect.appendChild(o);
+  });
+});
+
+document.getElementById("entryForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const t = document.getElementById("teacher").value;
+  const student = document.getElementById("student").value;
+  const subject = document.getElementById("subject").value;
+  const chapter = document.getElementById("chapter").value;
+  const workDone = document.getElementById("workDone").value;
+  const today = new Date().toISOString().split("T")[0];
+  const entry = { action: "submitEntry", date: today, teacherDisplay: teachers[t].display, student, subject, chapter, workDone };
+  
+  // POST request goes to the proxy
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(entry),
+    headers: {"Content-Type": "application/json"}
+  }).then(r => r.json()).then(result => {
+    if (result.success) showSubmission(t, student, subject, chapter, workDone);
+  });
+});
+
+function showSubmission(t, student, subject, chapter, workDone) {
+  const output = document.getElementById("output");
+  output.innerHTML = `<b>Submission Successful!</b><br><br>
+    Teacher: ${teachers[t].display}<br>
+    Student: ${student}<br>
+    Subject: ${subject}<br>
+    Chapter: ${chapter}<br>
+    Work Done: ${workDone}`;
+  output.style.display = "block";
+  document.getElementById("entryForm").reset();
+  setTimeout(() => output.style.display = "none", 5000);
+}
+
+// Add student modal logic
+document.getElementById("addStudentBtn").onclick = function() {
+  let select = document.getElementById("newStudentTeacher");
+  select.innerHTML = "";
+  Object.keys(teachers).forEach(k => {
+    let o = document.createElement("option");
+    o.value = k;
+    o.textContent = teachers[k].display;
+    select.appendChild(o);
+  });
+  document.getElementById("studentModal").style.display = "block";
+};
+
+document.getElementById("closeStudentModal").onclick = function() {
+  document.getElementById("studentModal").style.display = "none";
+};
+
+document.getElementById("saveStudentBtn").onclick = function() {
+  let name = document.getElementById("newStudentName").value.trim();
+  let tch = document.getElementById("newStudentTeacher").value;
+  if (!name || !tch) return alert("Enter student name and teacher.");
+  
+  // POST request goes to the proxy
+  fetch(SCRIPT_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      action:"addStudent",teacher:teachers[tch].display,student:name
+    })
+  }).then(r=>r.json()).then(result=>{
+    if(result.success){
+      document.getElementById("studentModal").style.display = "none";
+      loadTeachers();
+      alert("Student added!");
+    }
+  });
+  document.getElementById("newStudentName").value="";
+};
+
+document.getElementById("addTeacherBtn").onclick = function() {
+  document.getElementById("teacherModal").style.display = "block";
+};
+
+document.getElementById("closeTeacherModal").onclick = function() {
+  document.getElementById("teacherModal").style.display = "none";
+};
+
+document.getElementById("saveTeacherBtn").onclick = function() {
+  let display = document.getElementById("newTeacherName").value.trim();
+  let subjects = document.getElementById("newTeacherSubjects").value.split(",").map(s => s.trim()).filter(Boolean);
+  let pin = document.getElementById("newTeacherPin").value.trim();
+  if (!display || !subjects.length || !pin) return alert("Fill all fields.");
+  
+  // POST request goes to the proxy
+  fetch(SCRIPT_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({action:"addTeacher",display,subjects,pin})
+  }).then(r=>r.json()).then(result=>{
+    if(result.success){
+      document.getElementById("teacherModal").style.display = "none";
+      loadTeachers();
+      alert("Teacher added!");
+    }
+  });
+  document.getElementById("newTeacherName").value = "";
+  document.getElementById("newTeacherSubjects").value = "";
+  document.getElementById("newTeacherPin").value = "";
+};
+
+window.onclick = function(ev) {
+  if (ev.target === document.getElementById("studentModal")) document.getElementById("studentModal").style.display = "none";
+  if (ev.target === document.getElementById("teacherModal")) document.getElementById("teacherModal").style.display = "none";
+};
+
+// PIN and submissions
+document.getElementById("viewSubmissionsBtn").onclick = function() {
+  const pin = document.getElementById("pin").value;
+  const teacherKey = Object.keys(teachers).find(k => teachers[k].pin === pin);
+  if (!teacherKey) { alert("Invalid PIN"); return; }
+  const today = new Date().toISOString().split("T")[0];
+  
+  // GET request goes to the proxy
+  fetch(SCRIPT_URL + "?action=getEntries&teacher=" + teacherKey + "&pin=" + pin)
+    .then(r=>r.json()).then(res=>{
+      if (res.success && res.entries && res.entries.length>0)
+        displayTable(res.entries);
+      else
+        document.getElementById("tableContainer").innerHTML = "No submissions for today.";
+    });
+};
+
+function displayTable(entries) {
+  let html = `<table id='submissionsTable'><tr>
+  <th>Date</th><th>Student</th><th>Subject</th><th>Chapter</th><th>Work Done</th></tr>`;
+  entries.forEach(r => {
+    html += `<tr>
+    <td>${r.date}</td>
+    <td>${r.student}</td>
+    <td>${r.subject}</td>
+    <td>${r.chapter}</td>
+    <td>${r.workDone}</td>
+    </tr>`;
+  });
+  html += `</table><button id='copyButton' class='secondary'>Copy Table</button>`;
+  document.getElementById("tableContainer").innerHTML = html;
+  document.getElementById('copyButton').onclick = function() {
+    let table = document.getElementById('submissionsTable');
+    let range = document.createRange();
+    range.selectNode(table);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    try {
+      document.execCommand("copy");
+      alert("Table copied to clipboard!");
+    } catch (e) {
+      alert("Copy failed. Please copy manually.");
+    }
+    window.getSelection().removeAllRanges();
+  };
+}
+
+document.getElementById("toggleView").addEventListener("click", function () {
+  const main = document.getElementById("mainContainer");
+  main.classList.toggle("desktop");
+  document.getElementById("toggleView").textContent = main.classList.contains("desktop")
+    ? "Optimize for Mobile"
+    : "Optimize for Desktop";
+});
+
+loadTeachers();
+</script>
+</body>
+</html>
