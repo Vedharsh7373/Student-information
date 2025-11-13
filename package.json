@@ -4,7 +4,8 @@
   "description": "Vercel Serverless Proxy for Google Apps Script",
   "main": "api/entry.js",
   "scripts": {
-    "start": "vercel dev"
+    "start": "vercel dev",
+    "build": "npm install" 
   },
   "dependencies": {
     "axios": "^1.6.8",
