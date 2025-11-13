@@ -261,8 +261,7 @@
 </div>
 
 <script>
-// --- CHANGE MADE HERE ---
-// SCRIPT_URL now points to the Vercel proxy endpoint
+// SCRIPT_URL points to the Vercel proxy endpoint
 const SCRIPT_URL = "/api/entry"; 
 
 let teachers = {};
@@ -278,6 +277,11 @@ function loadTeachers() {
       } else {
         alert("Could not fetch teachers list.");
       }
+    })
+    // Catch fetch errors (like a 404 from Vercel)
+    .catch(e => {
+        console.error("Fetch error on loadTeachers:", e);
+        document.getElementById("teacher").innerHTML = '<option value="" disabled selected>Proxy / API Failed to Load</option>';
     });
 }
 
