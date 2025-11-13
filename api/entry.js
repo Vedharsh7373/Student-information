@@ -6,22 +6,11 @@ const cors = require('cors');
 // The URL of your Google Apps Script Web App
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxYkLyBOcknop-Tjeeaj_gV8ylHtQZ5c89Va4nycNhCTT8MCveYMwO8h6UTfVSKiHk/exec";
 
-// CORS configuration: Only allow requests from your frontend's domain.
-const allowedOrigins = [
-  'http://localhost:3000', // For local development (when using 'vercel dev')
-  // ** IMPORTANT **: Add your deployed Vercel domain here (e.g., 'https://your-portal-name.vercel.app')
-];
-
-// Initialize CORS middleware
+// Initialize CORS middleware - TEMPORARY BYPASS FOR TESTING
+// This allows all origins (less secure) but is necessary to confirm the proxy function works.
+// ONCE IT WORKS, CHANGE THIS BACK TO THE STRICT ALLOWED_ORIGINS LIST!
 const corsMiddleware = cors({
-    origin: (origin, callback) => {
-        // Allow requests with no origin (e.g., server-to-server) or from allowed origins
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'), false);
-        }
-    },
+    origin: '*', // Allows all origins
     methods: ['GET', 'POST', 'OPTIONS'],
 });
 
@@ -43,6 +32,7 @@ module.exports = async (req, res) => {
     try {
         await runMiddleware(req, res, corsMiddleware);
     } catch (error) {
+        // This is unlikely with the '*' bypass, but kept for robustness
         res.status(403).json({ success: false, message: 'CORS policy violation.' });
         return;
     }
